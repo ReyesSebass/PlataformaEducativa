@@ -14,7 +14,7 @@
     <name>PlataformaEducativa</name>
     <description>una plataforma Educativa con herramientas interactivas</description>
     <properties>
-        <java.version>20</java.version>
+        <java.version>21</java.version>
     </properties>
     <dependencies>
         <dependency>

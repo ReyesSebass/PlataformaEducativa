@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="head">
+        <title>Plataforma Educativa</title>
+        <meta charset="UTF-8" />
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>   
+        <script th:src="@{/js/rutina.js}" type="text/javascript"></script> 
+
+        <style>
+            header {
+                background-color: #545357;
+                height: 60px;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1000;
+            }
+
+            footer {
+                background-color: #007bff;
+                color: white;
+                padding: 20px;
+                text-align: center;
+                position: fixed;
+                width: 100%;
+                bottom: 0;
+            }
+
+            body {
+                background-size: cover;
+                background-repeat: no-repeat;
+                padding-top: 60px;
+                padding-bottom: 100px;
+                margin: 0;
+                background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20230526/pngtree-an-old-bookcase-in-a-library-image_2642908.jpg');
+            }
+
+        </style>
+    </head>
+    <body> 
+        <header th:fragment="header" class="header">
+            
+        </header>
+
+        
+
+        <footer th:fragment="footer">
+            <div class="container">
+                <div class="col">
+                    <p class="lead">
+                        Plataforma educativa. Grupo #
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </body> <!-- Aquí se cierra el cuerpo -->
+</html>

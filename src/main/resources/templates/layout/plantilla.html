@@ -21,13 +21,17 @@
             }
 
             footer {
-                background-color: #007bff;
-                color: white;
+                background-color: #C298F8;
+                color: black;
                 padding: 20px;
                 text-align: center;
                 position: fixed;
                 width: 100%;
                 bottom: 0;
+            }
+            section {
+                background-color: #C298F8;
+                
             }
 
             body {
@@ -43,16 +47,51 @@
     </head>
     <body> 
         <header th:fragment="header" class="header">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-secondary p-0">
+                <div class="container">
+                    <a th:href="@{/}" class="navbar-brand">[[#{aplicacion.titulo}]]</a>
+                    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <ul class="navbar-nav">
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/seccion/listado}">[[#{plantilla.secciones}]]</a></li>
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/profesor/listado}">[[#{plantilla.profesores}]]</a></li>
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/estudiante/listado}">[[#{plantilla.estudiantes}]]</a></li>
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/materia/listado}">[[#{plantilla.materias}]]</a></li>
+                        </ul>
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Lang</a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item"  th:href="@{/(lang=es)}">ES</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/(lang=en)}">EN</a></li>
+                                </ul>
+                            </li>
+                        </ul>                        
+                    </div>
+                </div>
+            </nav>
+            <section id="main-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1> [[#{plantilla.sistemaEducativo}]]</h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </header>
             
         </header>
 
         
 
-        <footer th:fragment="footer">
+      <footer th:fragment="footer"   >
             <div class="container">
                 <div class="col">
-                    <p class="lead">
-                        Plataforma educativa. Grupo #
+                    <p class="lead text-center">
+                         [[#{plantilla.derechos}]]
                     </p>
                 </div>
             </div>

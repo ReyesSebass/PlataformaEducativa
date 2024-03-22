@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <link rel="stylesheet" href="../../static/css/estilo.css" type="text/css"/>
+        <link rel="stylesheet" href="../../static/css/estilo.css" type="text/css">
+    <body>
+       <!-- se crear el boton de agregar... llamará a una ventana modal-->
+        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">   
+                        <button 
+                            type="button" 
+                            class="btn btn-primary btn-block" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#agregarMateria">
+                            <i class="fas fa-plus"></i> [[#{materia.agregar}]]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>>
+        
+         <!-- 2 Fragmento para agregar materia, es la ventana modal -->
+        <section th:fragment="agregarMateria">
+            <div id="agregarMateria" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">[[#{materia.agregar}]]</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/materia/guardar}" th:object="${materia}"
+                              method="POST" class="was-validated" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                
+                              <!--    <div class="mb-3">
+                                    <label for="idMateria">[[#{materia.categoria}]]</label>
+                                    <select name="idCategoria" class="form-control">
+                                        <option th:each="item"   ${categorias}value="${item.idCategoria}"
+                                              [[${item.descrpcion}]]
+                                    </option>
+                                 </select> -->
+                                </div>
+                                
+
+                                <div class="mb-3">
+                                    <label for="Nombres">[[#{materia.Nombre}]]</label>
+                                    <input type="text" class="form-control" name="Nombres" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="apellidos">[[#{materia.idProfesor}]]</label>
+                                    <input type="number" class="form-control" name="apellidos" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fechasDeNacimiento">[[#{materia.grado}]]</label>
+                                    <input type="number" class="form-control" name="fechasDeNacimiento" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="materias">[[#{materia.idSeccion}]]</label>
+                                    <input type="text" class="form-control" name="materias" required="true"/>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="activo">[[#{materia.activo}]]</label>
+                                    <input class="form-check-input" type="checkbox" name="activo" id="activo"/>
+                                </div>
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+ <!-- 3 Sección principal para mostrar la informaccion de la entidad materia -->
+        <section th:fragment="listadoMaterias" id="materias">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>[[#{materia.listado}]]</h4>
+                            </div>
+                            <div th:if="${materias != null and !materias.empty}">
+                                <table class="table table-striped table-hover">
+                                    <thead class="table-dark">
+                                        <tr><th>#</th>
+                                            <th>[[#{materia.nombre}]]</th>
+                                            <th>[[#{materia.idProfesor}]]</th>
+                                            <th>[[#{materia.grado}]]</th>
+                                            <th>[[#{materia.idSeccion}]]</th>                                          
+                                            <th>[[#{materia.activo}]]</th>
+                                            <th></th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="materia, contador : ${materias}">
+                                            <td>[[{contador.count}]]</td>
+                                            <td>[[{materia.nombre}]]</td>
+                                            <td>[[{materia.idProfesor}]]</td>
+                                            <td>[[{materia.grado}]]</td>
+                                            <td>[[{materia.idSeccion}]]</td>
+                                            <td th:text="${materia.activo} ? 'Activa' : 'Inactiva'" />
+                                            <td><a th:href="@{/materia/eliminar/}+${materia.idMateria}"
+                                                   class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
+                                                <a th:href="@{/materia/modificar/}+${materia.idMateria}"
+                                                   class="btn btn-success">
+                                                    <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]</a></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${materias == null or materias.empty}">
+                                <span>[[#{lista.vacia}]]</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center bg-success text-white mb-3">
+                            <div class="card-body">
+                                <h3>[[#{materia.total}]]</h3>
+                                <h4 class="fs-2"><i class="fas fa-users"></i> [[${totalMaterias}]]</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!-- 4 Fragmento que se utiliza en la página modifca.html -->
+        <section th:fragment="editarMateria">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form method="POST"
+                          th:action="@{/materia/guardar}" 
+                          th:object="${materia}"
+                          class="was-validated"                          
+                          enctype="multipart/form-data">
+                        <input type="hidden" name="idMateria" th:field="*{idMateria}"/>
+                        <section th:replace="~{materia/fragmentos :: botonesEditar}"/>
+                        <div id=details>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>[[#{accion.actualizar}]]</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                   <!--  <label for="idMateria">[[#{materia.categoria}]]</label>
+                                                    <select name="idCategoria" th:field ="{idCategoria}" class="form-control">
+                                                      <option th:each="item"   ${categorias}value="${item.idCategoria}"
+                                                         [[${item.descrpcion}]]
+                                                      </option>
+                                                    </select>-->
+                                                </div>
+                                                
+                                                <div class="mb-3">
+                                                    <label for="Nombre">[[#{materia.Nombre}]]</label>
+                                                    <input type="text" class="form-control" name="Nombre" th:field ="{Nombre}" required="true"/>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="apellido">[[#{materia.idPrefesor}]]</label>
+                                                    <input type="text" class="form-control" name="apellido" th:field ="apellido}" required="true"/>
+                                                </div>
+                                                <div class="mb-3">
+                                                     <label for="fechasDeNacimiento">[[#{materia.grado}]]</label>
+                                                      <input type="number" class="form-control" name="fechasDeNacimiento" th:field ="{fechasDeNacimiento}" required="true"/>
+                                                </div>
+                                                <div class="mb-3">
+                                                     <label for="materias">[[#{materia.idSeccion}]]</label>
+                                                      <input type="text" class="form-control" name="materias" th:field ="{materias}" required="true"/>
+                                                </div>
+                                                
+                                                <div class="mb-3">
+                                                    <label for="activo">[[#{materia.activo}]]</label>
+                                                    <input class="form-check-input" 
+                                                           type="checkbox" 
+                                                           name="activo" 
+                                                           id="activo"
+                                                           th:field="*{activo}">
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </body>
+</html>

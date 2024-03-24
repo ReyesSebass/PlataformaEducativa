@@ -2,6 +2,7 @@ package PlataformaEdu.controller;
 
 import PlataformaEdu.domain.Materia;
 import PlataformaEdu.servicee.MateriaService;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,9 +22,9 @@ public class MateriaController {
 
     @GetMapping("/listado")
     public String inicio(Model model) {
-        var materias = materiaService.getMaterias(false);
-        model.addAttribute("materias", materias);
-        model.addAttribute("totalMateriaes", materias.size());
+        List<Materia> lista  = materiaService.getMaterias(false);
+        model.addAttribute("materias", lista);
+        model.addAttribute("totalMateriaes", lista.size());
         return "/materia/listado";
     }
     

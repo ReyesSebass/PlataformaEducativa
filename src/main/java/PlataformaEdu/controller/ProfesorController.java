@@ -2,6 +2,7 @@ package PlataformaEdu.controller;
 
 import PlataformaEdu.domain.Profesor;
 import PlataformaEdu.servicee.ProfesorService;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,9 +22,9 @@ public class ProfesorController {
 
     @GetMapping("/listado")
     public String inicio(Model model) {
-        var profesores = profesorService.getProfesores(false);
-        model.addAttribute("profesors", profesores);
-        model.addAttribute("totalProfesores", profesores.size());
+        List<Profesor> lista  = profesorService.getProfesores(false);
+        model.addAttribute("profesor", lista);
+        model.addAttribute("totalProfesores", lista.size());
         return "/profesor/listado";
     }
     

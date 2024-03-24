@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "profesor")
+@Table(name = "profesores")
 public class Profesor implements Serializable {
 
     private static final long serialVersionUID = 1L;

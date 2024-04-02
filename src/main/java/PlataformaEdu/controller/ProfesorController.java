@@ -23,8 +23,8 @@ public class ProfesorController {
     @GetMapping("/listado")
     public String inicio(Model model) {
         List<Profesor> lista  = profesorService.getProfesores(false);
-        model.addAttribute("profesor", lista);
-        model.addAttribute("totalProfesores", lista.size());
+        model.addAttribute("profesores", lista);
+        model.addAttribute("totalProfesor", lista.size());
         return "/profesor/listado";
     }
     

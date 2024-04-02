@@ -35,7 +35,5 @@ public class Seccion implements Serializable{
         this.cantidadEstudiantes = cantidadEstudiantes;
         this.activo = activo;
     }
-    
-    
-    
+
 }

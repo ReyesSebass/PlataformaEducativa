@@ -5,7 +5,8 @@
     <body >
         <header th:replace="layout/plantilla :: header"> </header>
         
-        <section th:replace="calendario/fragmentos :: editarcalendario"/>
+        <section th:replace="materia/fragmentos :: editarMateria"/>
+        <section th:replace="~{materia/fragmentos :: botonesEditar}"/>
         
         <footer th:replace= "layout/plantilla :: footer"> </footer>
         

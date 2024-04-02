@@ -14,8 +14,8 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "materia")
-public class Materia implements Serializable{
-   
+public class Materia implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -25,10 +25,10 @@ public class Materia implements Serializable{
     private String nombre;
     private int grado;
     private boolean activo;
-    
+
     @ManyToOne
     @JoinColumn(name = "id_profesor")
-    Profesor profesor;
+    private Profesor idProfesor;
 
     public Materia() {
     }

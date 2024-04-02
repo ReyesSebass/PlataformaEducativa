@@ -31,9 +31,9 @@ public class Profesor implements Serializable {
     private int telefono;
     private boolean activo;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "id_materia")
-    Materia materia;
+    Materia materia;*/
 
     public Profesor() {
     }
@@ -45,6 +45,6 @@ public class Profesor implements Serializable {
         this.correo = correo;
         this.telefono = telefono;
         this.activo = activo;
-        this.materia = materia;
+    //    this.materia = materia;
     }
 }

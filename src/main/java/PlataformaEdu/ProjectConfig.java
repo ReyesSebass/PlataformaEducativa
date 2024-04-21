@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -27,11 +28,9 @@ public class ProjectConfig implements WebMvcConfigurer {
         slr.setDefaultLocale(Locale.getDefault());
         slr.setLocaleAttributeName("session.current.locale");
         slr.setTimeZoneAttributeName("session.current.timezone");
-
         return slr;
     }
 
-    /* localeChangeInterceptor se utiliza para crear un interceptor de cambio de idioma */
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         var lci = new LocaleChangeInterceptor();
@@ -40,8 +39,8 @@ public class ProjectConfig implements WebMvcConfigurer {
     }
 
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(localeChangeInterceptor());
+    public void addInterceptors(InterceptorRegistry registro) {
+        registro.addInterceptor(localeChangeInterceptor());
     }
 
     //Bean para poder acceder a los Messages.properties en código...
